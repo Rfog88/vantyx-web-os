@@ -1,4 +1,4 @@
-import type { SiteConfig } from "@site-config";
+import type { SiteConfig } from "@/lib/site-config";
 import { CreditCard } from "lucide-react";
 
 export function FinancingCTA({ config }: { config: SiteConfig }) {

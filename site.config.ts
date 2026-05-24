@@ -1,93 +1,12 @@
 /**
- * Vantyx Web OS — site config schema + default Lima electrician example.
+ * Vantyx Web OS — populated site config (per-lead data).
  *
- * Every component reads from this file. The `demo-gen` Paperclip skill
- * generates a populated version of this file per prospect from `brand-extract`
- * output. Keep the SHAPE stable; only the values vary per site.
+ * The `SiteConfig` *type* lives in `src/lib/site-config.ts` so this file can
+ * be safely overwritten by the `demo-gen` Paperclip skill's `template-fill`
+ * step. Do NOT redeclare the type here; import it.
  */
 
-export type SiteConfig = {
-  business: {
-    name: string;
-    legalName?: string;
-    tagline?: string;
-    licenseNumber?: string;
-    insurance?: string;
-    bbb?: { accredited: boolean; rating?: string };
-    foundedYear?: number;
-    googlePlaceId?: string;
-  };
-  contact: {
-    phone: string;          // E.164 or pretty — we normalize for `tel:` links
-    email: string;
-    address: {
-      street: string;
-      city: string;
-      state: string;
-      zip: string;
-    };
-    hours: {
-      mon: string;
-      tue: string;
-      wed: string;
-      thu: string;
-      fri: string;
-      sat: string;
-      sun: string;
-    };
-    emergency24_7: boolean;
-  };
-  serviceArea: {
-    zips: string[];
-    hqLatLng: [number, number];      // [lat, lng]
-    radiusMiles: number;
-  };
-  services: Array<{
-    title: string;
-    description: string;
-    icon?: string;                    // lucide icon name (e.g. "Zap", "Wrench")
-  }>;
-  gallery?: Array<{
-    src: string;
-    alt: string;
-    type?: "before-after" | "project";
-  }>;
-  branding: {
-    palette: {
-      primary: string;                // e.g. "#0F172A"
-      accent: string;                 // e.g. "#F59E0B"
-      bg: string;                     // e.g. "#FFFFFF"
-      text: string;                   // e.g. "#111827"
-      muted: string;                  // e.g. "#6B7280"
-    };
-    fonts: {
-      headings: string;               // Google Font family or system stack
-      body: string;
-    };
-  };
-  hero: {
-    image: string;                    // background image URL
-    service: string;                  // e.g. "Electrician"
-    city: string;                     // e.g. "Lima, OH"
-    headline?: string;                // override default `{service} in {city}`
-    subhead?: string;
-  };
-  financing?: {
-    enabled: boolean;
-    partner?: string;
-    minProjectUsd?: number;
-  };
-  testimonials?: Array<{
-    author: string;
-    quote: string;
-    rating: number;                   // 1–5
-  }>;
-};
-
-/* -----------------------------------------------------------
- * Default config — Lima electrician (used when no override).
- * `demo-gen` replaces this object per prospect.
- * --------------------------------------------------------- */
+import type { SiteConfig } from "@/lib/site-config";
 
 export const siteConfig: SiteConfig = {
   business: {

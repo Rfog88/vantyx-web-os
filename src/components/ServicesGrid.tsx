@@ -1,4 +1,4 @@
-import type { SiteConfig } from "@site-config";
+import type { SiteConfig } from "@/lib/site-config";
 import * as Icons from "lucide-react";
 
 type IconName = keyof typeof Icons;

@@ -1,5 +1,5 @@
 import Image from "next/image";
-import type { SiteConfig } from "@site-config";
+import type { SiteConfig } from "@/lib/site-config";
 import { Phone, ArrowRight } from "lucide-react";
 import { telLink } from "@/lib/cn";
 

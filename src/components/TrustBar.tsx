@@ -1,4 +1,4 @@
-import type { SiteConfig } from "@site-config";
+import type { SiteConfig } from "@/lib/site-config";
 import { ShieldCheck, BadgeCheck, Star } from "lucide-react";
 
 export function TrustBar({ config }: { config: SiteConfig }) {

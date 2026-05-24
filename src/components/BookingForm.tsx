@@ -1,4 +1,4 @@
-import type { SiteConfig } from "@site-config";
+import type { SiteConfig } from "@/lib/site-config";
 import { Send } from "lucide-react";
 
 async function submitBooking(formData: FormData): Promise<void> {

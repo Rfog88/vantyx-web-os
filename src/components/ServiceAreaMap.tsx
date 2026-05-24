@@ -1,4 +1,4 @@
-import type { SiteConfig } from "@site-config";
+import type { SiteConfig } from "@/lib/site-config";
 import { MapPin } from "lucide-react";
 
 function buildMapboxUrl(lat: number, lng: number, zoom: number, w = 800, h = 400): string | null {

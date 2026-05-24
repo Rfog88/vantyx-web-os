@@ -1,4 +1,4 @@
-import type { SiteConfig } from "@site-config";
+import type { SiteConfig } from "@/lib/site-config";
 
 function buildLocalBusinessJsonLd(config: SiteConfig) {
   const { business, contact, serviceArea, hero } = config;

@@ -1,5 +1,5 @@
 import Image from "next/image";
-import type { SiteConfig } from "@site-config";
+import type { SiteConfig } from "@/lib/site-config";
 
 export function BeforeAfterGallery({ config }: { config: SiteConfig }) {
   const items = config.gallery || [];
