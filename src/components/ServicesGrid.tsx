@@ -4,10 +4,10 @@ import * as Icons from "lucide-react";
 type IconName = keyof typeof Icons;
 
 function ServiceIcon({ name }: { name?: string }) {
-  const fallback = Icons.Wrench;
-  if (!name) return <fallback className="h-7 w-7 text-brand-accent" aria-hidden="true" />;
+  const Fallback = Icons.Wrench;
+  if (!name) return <Fallback className="h-7 w-7 text-brand-accent" aria-hidden="true" />;
   const Icon = (Icons as Record<string, unknown>)[name] as React.ComponentType<{ className?: string; "aria-hidden"?: boolean }> | undefined;
-  if (!Icon) return <fallback className="h-7 w-7 text-brand-accent" aria-hidden="true" />;
+  if (!Icon) return <Fallback className="h-7 w-7 text-brand-accent" aria-hidden="true" />;
   return <Icon className="h-7 w-7 text-brand-accent" aria-hidden={true} />;
 }
 

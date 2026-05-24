@@ -1,7 +1,7 @@
 import type { SiteConfig } from "@site-config";
 import { Send } from "lucide-react";
 
-async function submitBooking(formData: FormData) {
+async function submitBooking(formData: FormData): Promise<void> {
   "use server";
 
   const name = (formData.get("name") || "").toString().trim();
@@ -11,16 +11,16 @@ async function submitBooking(formData: FormData) {
   const message = (formData.get("message") || "").toString().trim();
 
   if (!name || !phone) {
-    return { ok: false, reason: "Name and phone are required." };
+    console.warn("[BookingForm] missing required fields");
+    return;
   }
 
   const resendKey = process.env.RESEND_API_KEY;
   const toEmail = process.env.RESEND_TO_EMAIL;
 
   if (!resendKey || !toEmail) {
-    // Graceful degrade — log only. demo-gen will set these when prospect engages.
     console.log("[BookingForm] no Resend configured; would have sent:", { name, phone, email, service, message });
-    return { ok: true };
+    return;
   }
 
   try {
@@ -47,12 +47,9 @@ async function submitBooking(formData: FormData) {
     });
     if (!res.ok) {
       console.error("[BookingForm] resend failed", res.status, await res.text());
-      return { ok: false, reason: "We couldn't send right now. Please call us." };
     }
-    return { ok: true };
   } catch (e) {
     console.error("[BookingForm] resend error", e);
-    return { ok: false, reason: "We couldn't send right now. Please call us." };
   }
 }
 
