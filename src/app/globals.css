@@ -1,0 +1,38 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand-primary: var(--vantyx-primary, #0F172A);
+  --color-brand-accent: var(--vantyx-accent, #F59E0B);
+  --color-brand-bg: var(--vantyx-bg, #FFFFFF);
+  --color-brand-text: var(--vantyx-text, #111827);
+  --color-brand-muted: var(--vantyx-muted, #6B7280);
+
+  --font-headings: var(--vantyx-font-headings, "Inter, system-ui, sans-serif");
+  --font-body: var(--vantyx-font-body, "Inter, system-ui, sans-serif");
+}
+
+:root {
+  color-scheme: light;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--color-brand-text);
+  background: var(--color-brand-bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-headings);
+  letter-spacing: -0.02em;
+}
+
+/* Tabular numerals for prices, phone numbers */
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
