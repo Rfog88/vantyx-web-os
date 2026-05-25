@@ -48,13 +48,31 @@ export function FooterLocalSEO({ config }: { config: SiteConfig }) {
         <div className="grid gap-8 md:grid-cols-3">
           <div>
             <h3 className="mb-2 text-lg font-bold text-white">{config.business.name}</h3>
-            {config.business.tagline && (
+            {config.business.tagline ? (
               <p className="text-sm text-white/70">{config.business.tagline}</p>
+            ) : (
+              process.env.NODE_ENV !== "production" && (
+                <p
+                  data-vantyx-missing="tagline"
+                  className="text-sm text-red-300 ring-1 ring-red-400/40 px-1"
+                >
+                  [missing: tagline]
+                </p>
+              )
             )}
-            {config.business.licenseNumber && (
+            {config.business.licenseNumber ? (
               <p className="mt-3 text-xs tabular text-white/60">
                 License #{config.business.licenseNumber}
               </p>
+            ) : (
+              process.env.NODE_ENV !== "production" && (
+                <p
+                  data-vantyx-missing="licenseNumber"
+                  className="mt-3 text-xs tabular text-red-300 ring-1 ring-red-400/40 px-1"
+                >
+                  [missing: license #]
+                </p>
+              )
             )}
           </div>
 

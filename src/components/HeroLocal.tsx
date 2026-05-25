@@ -23,10 +23,19 @@ export function HeroLocal({ config }: { config: SiteConfig }) {
       </div>
 
       <div className="mx-auto flex max-w-5xl flex-col items-start gap-6 px-6 py-20 md:py-28 lg:py-32">
-        {business.tagline && (
+        {business.tagline ? (
           <p className="rounded-full bg-brand-accent/20 px-3 py-1 text-sm font-medium text-brand-accent">
             {business.tagline}
           </p>
+        ) : (
+          process.env.NODE_ENV !== "production" && (
+            <p
+              data-vantyx-missing="tagline"
+              className="rounded-full bg-red-500/30 px-3 py-1 text-sm font-medium text-red-100 ring-1 ring-red-300"
+            >
+              [missing: tagline]
+            </p>
+          )
         )}
         <h1 className="text-4xl font-bold leading-tight md:text-5xl lg:text-6xl">
           {headline}

@@ -52,6 +52,9 @@ export type SiteConfig = {
     src: string;
     alt: string;
     type?: "before-after" | "project";
+    before?: string;
+    after?: string;
+    caption?: string;
   }>;
   branding: {
     palette: {
@@ -82,5 +85,7 @@ export type SiteConfig = {
     author: string;
     quote: string;
     rating: number;                   // 1–5
+    body?: string;                    // alias of `quote` — VAN-42 source-of-truth field
+    location?: string;                // e.g. "Lima, OH"
   }>;
 };
