@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 800" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Electrician concept — recessed ceiling lighting in dramatic interior">
+  <defs>
+    <linearGradient id="ceiling" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0B1220"/>
+      <stop offset="0.55" stop-color="#0F172A"/>
+      <stop offset="1" stop-color="#1F2937"/>
+    </linearGradient>
+    <radialGradient id="can" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#FDE68A"/>
+      <stop offset="0.35" stop-color="#F59E0B"/>
+      <stop offset="1" stop-color="#F59E0B" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="floor" cx="50%" cy="50%" r="60%">
+      <stop offset="0" stop-color="#F59E0B" stop-opacity="0.10"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="halo"><feGaussianBlur stdDeviation="22"/></filter>
+  </defs>
+
+  <rect width="1920" height="800" fill="url(#ceiling)"/>
+
+  <!-- floor band -->
+  <rect x="0" y="640" width="1920" height="160" fill="#050912"/>
+  <rect x="0" y="640" width="1920" height="160" fill="url(#floor)"/>
+  <line x1="0" y1="640" x2="1920" y2="640" stroke="#1F2937" stroke-width="1.5" opacity="0.5"/>
+
+  <!-- back wall faint horizon -->
+  <line x1="0" y1="200" x2="1920" y2="200" stroke="#1F2937" stroke-width="1" opacity="0.35"/>
+
+  <!-- recessed can pattern: rows of glowing cans -->
+  <g>
+    <!-- row 1 -->
+    <g>
+      <circle cx="240"  cy="120" r="60" fill="url(#can)" filter="url(#halo)" opacity="0.65"/>
+      <circle cx="240"  cy="120" r="14" fill="#FDE68A"/>
+      <circle cx="240"  cy="120" r="6"  fill="#FFFBEB"/>
+    </g>
+    <g>
+      <circle cx="640"  cy="120" r="60" fill="url(#can)" filter="url(#halo)" opacity="0.65"/>
+      <circle cx="640"  cy="120" r="14" fill="#FDE68A"/>
+      <circle cx="640"  cy="120" r="6"  fill="#FFFBEB"/>
+    </g>
+    <g>
+      <circle cx="1040" cy="120" r="60" fill="url(#can)" filter="url(#halo)" opacity="0.65"/>
+      <circle cx="1040" cy="120" r="14" fill="#FDE68A"/>
+      <circle cx="1040" cy="120" r="6"  fill="#FFFBEB"/>
+    </g>
+    <g>
+      <circle cx="1440" cy="120" r="60" fill="url(#can)" filter="url(#halo)" opacity="0.65"/>
+      <circle cx="1440" cy="120" r="14" fill="#FDE68A"/>
+      <circle cx="1440" cy="120" r="6"  fill="#FFFBEB"/>
+    </g>
+    <g>
+      <circle cx="1840" cy="120" r="60" fill="url(#can)" filter="url(#halo)" opacity="0.65"/>
+      <circle cx="1840" cy="120" r="14" fill="#FDE68A"/>
+      <circle cx="1840" cy="120" r="6"  fill="#FFFBEB"/>
+    </g>
+    <!-- row 2 (further, dimmer) -->
+    <g opacity="0.55">
+      <circle cx="440"  cy="280" r="44" fill="url(#can)" filter="url(#halo)"/>
+      <circle cx="440"  cy="280" r="9"  fill="#FDE68A"/>
+    </g>
+    <g opacity="0.55">
+      <circle cx="840"  cy="280" r="44" fill="url(#can)" filter="url(#halo)"/>
+      <circle cx="840"  cy="280" r="9"  fill="#FDE68A"/>
+    </g>
+    <g opacity="0.55">
+      <circle cx="1240" cy="280" r="44" fill="url(#can)" filter="url(#halo)"/>
+      <circle cx="1240" cy="280" r="9"  fill="#FDE68A"/>
+    </g>
+    <g opacity="0.55">
+      <circle cx="1640" cy="280" r="44" fill="url(#can)" filter="url(#halo)"/>
+      <circle cx="1640" cy="280" r="9"  fill="#FDE68A"/>
+    </g>
+  </g>
+
+  <!-- light pools on floor -->
+  <g opacity="0.4">
+    <ellipse cx="240"  cy="700" rx="170" ry="22" fill="url(#can)" filter="url(#halo)"/>
+    <ellipse cx="640"  cy="700" rx="170" ry="22" fill="url(#can)" filter="url(#halo)"/>
+    <ellipse cx="1040" cy="700" rx="170" ry="22" fill="url(#can)" filter="url(#halo)"/>
+    <ellipse cx="1440" cy="700" rx="170" ry="22" fill="url(#can)" filter="url(#halo)"/>
+  </g>
+
+  <rect width="1920" height="800" fill="#000" opacity="0.18"/>
+
+  <g font-family="Inter, system-ui, sans-serif" fill="#374151">
+    <text x="1880" y="775" font-size="14" text-anchor="end" letter-spacing="2">VANTYX · CONCEPT</text>
+  </g>
+</svg>

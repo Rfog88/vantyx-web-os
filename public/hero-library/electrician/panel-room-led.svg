@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 800" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Electrician concept — panel room with amber LED accent">
+  <defs>
+    <linearGradient id="wall" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0B1220"/>
+      <stop offset="0.55" stop-color="#0F172A"/>
+      <stop offset="1" stop-color="#050912"/>
+    </linearGradient>
+    <radialGradient id="spot" cx="38%" cy="42%" r="55%">
+      <stop offset="0" stop-color="#F59E0B" stop-opacity="0.18"/>
+      <stop offset="0.5" stop-color="#F59E0B" stop-opacity="0.06"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="panel" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1F2937"/>
+      <stop offset="1" stop-color="#0F172A"/>
+    </linearGradient>
+    <linearGradient id="ledStrip" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#F59E0B" stop-opacity="0"/>
+      <stop offset="0.15" stop-color="#FACC15"/>
+      <stop offset="0.85" stop-color="#F59E0B"/>
+      <stop offset="1" stop-color="#F59E0B" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="soft" x="-10%" y="-10%" width="120%" height="120%">
+      <feGaussianBlur stdDeviation="6"/>
+    </filter>
+  </defs>
+
+  <!-- wall -->
+  <rect width="1920" height="800" fill="url(#wall)"/>
+  <rect width="1920" height="800" fill="url(#spot)"/>
+
+  <!-- concrete floor band -->
+  <rect x="0" y="640" width="1920" height="160" fill="#070B14"/>
+  <rect x="0" y="640" width="1920" height="2" fill="#1F2937" opacity="0.6"/>
+
+  <!-- electrical panel -->
+  <rect x="640" y="180" width="280" height="420" rx="6" fill="url(#panel)" stroke="#374151" stroke-width="2"/>
+  <rect x="660" y="200" width="240" height="380" rx="3" fill="#0B1220" stroke="#1F2937" stroke-width="1"/>
+  <!-- breaker rows -->
+  <g fill="#111827" stroke="#1F2937" stroke-width="0.5">
+    <rect x="678" y="220" width="92" height="14" rx="2"/>
+    <rect x="790" y="220" width="92" height="14" rx="2"/>
+    <rect x="678" y="240" width="92" height="14" rx="2"/>
+    <rect x="790" y="240" width="92" height="14" rx="2"/>
+    <rect x="678" y="260" width="92" height="14" rx="2"/>
+    <rect x="790" y="260" width="92" height="14" rx="2"/>
+    <rect x="678" y="280" width="92" height="14" rx="2"/>
+    <rect x="790" y="280" width="92" height="14" rx="2"/>
+    <rect x="678" y="300" width="92" height="14" rx="2"/>
+    <rect x="790" y="300" width="92" height="14" rx="2"/>
+    <rect x="678" y="320" width="92" height="14" rx="2"/>
+    <rect x="790" y="320" width="92" height="14" rx="2"/>
+    <rect x="678" y="340" width="92" height="14" rx="2"/>
+    <rect x="790" y="340" width="92" height="14" rx="2"/>
+    <rect x="678" y="360" width="92" height="14" rx="2"/>
+    <rect x="790" y="360" width="92" height="14" rx="2"/>
+    <rect x="678" y="380" width="92" height="14" rx="2"/>
+    <rect x="790" y="380" width="92" height="14" rx="2"/>
+    <rect x="678" y="400" width="92" height="14" rx="2"/>
+    <rect x="790" y="400" width="92" height="14" rx="2"/>
+    <rect x="678" y="420" width="92" height="14" rx="2"/>
+    <rect x="790" y="420" width="92" height="14" rx="2"/>
+  </g>
+
+  <!-- amber LED accent strip above panel -->
+  <rect x="540" y="148" width="480" height="6" fill="url(#ledStrip)"/>
+  <rect x="540" y="148" width="480" height="40" fill="url(#ledStrip)" opacity="0.25" filter="url(#soft)"/>
+
+  <!-- conduit pipes -->
+  <line x1="780" y1="180" x2="780" y2="80"  stroke="#1F2937" stroke-width="6" stroke-linecap="round"/>
+  <line x1="820" y1="180" x2="820" y2="60"  stroke="#1F2937" stroke-width="6" stroke-linecap="round"/>
+  <line x1="780" y1="80"  x2="900" y2="80"  stroke="#1F2937" stroke-width="6" stroke-linecap="round"/>
+  <line x1="820" y1="60"  x2="940" y2="60"  stroke="#1F2937" stroke-width="6" stroke-linecap="round"/>
+
+  <!-- subtle vignette -->
+  <rect width="1920" height="800" fill="#000" opacity="0.18"/>
+
+  <!-- concept watermark -->
+  <g font-family="Inter, system-ui, sans-serif" fill="#374151">
+    <text x="1880" y="775" font-size="14" text-anchor="end" letter-spacing="2">VANTYX · CONCEPT</text>
+  </g>
+</svg>

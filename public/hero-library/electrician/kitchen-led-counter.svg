@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 800" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Electrician concept — kitchen with under-cabinet LED">
+  <defs>
+    <linearGradient id="room" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0E1626"/>
+      <stop offset="0.55" stop-color="#0F172A"/>
+      <stop offset="1" stop-color="#070B14"/>
+    </linearGradient>
+    <linearGradient id="counter" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1F2937"/>
+      <stop offset="1" stop-color="#0F172A"/>
+    </linearGradient>
+    <linearGradient id="cab" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#111827"/>
+      <stop offset="1" stop-color="#0B1220"/>
+    </linearGradient>
+    <linearGradient id="underLed" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#FACC15" stop-opacity="0"/>
+      <stop offset="0.1" stop-color="#FACC15"/>
+      <stop offset="0.9" stop-color="#F59E0B"/>
+      <stop offset="1" stop-color="#F59E0B" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="58%" r="55%">
+      <stop offset="0" stop-color="#FACC15" stop-opacity="0.20"/>
+      <stop offset="0.5" stop-color="#F59E0B" stop-opacity="0.06"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="bloom"><feGaussianBlur stdDeviation="10"/></filter>
+  </defs>
+
+  <rect width="1920" height="800" fill="url(#room)"/>
+  <rect width="1920" height="800" fill="url(#glow)"/>
+
+  <!-- upper cabinets -->
+  <rect x="0"   y="100" width="1920" height="220" fill="url(#cab)"/>
+  <line x1="0"   y1="320" x2="1920" y2="320" stroke="#000" stroke-width="2"/>
+
+  <!-- cabinet divisions -->
+  <g stroke="#0B1220" stroke-width="2">
+    <line x1="320"  y1="100" x2="320"  y2="320"/>
+    <line x1="640"  y1="100" x2="640"  y2="320"/>
+    <line x1="960"  y1="100" x2="960"  y2="320"/>
+    <line x1="1280" y1="100" x2="1280" y2="320"/>
+    <line x1="1600" y1="100" x2="1600" y2="320"/>
+  </g>
+
+  <!-- under-cabinet LED strip (glow bloom) -->
+  <rect x="0" y="296" width="1920" height="48" fill="url(#underLed)" opacity="0.45" filter="url(#bloom)"/>
+  <rect x="0" y="316" width="1920" height="6"  fill="url(#underLed)"/>
+
+  <!-- counter -->
+  <rect x="0" y="430" width="1920" height="36" fill="url(#counter)"/>
+  <rect x="0" y="466" width="1920" height="14" fill="#070B14"/>
+
+  <!-- counter reflection of LED -->
+  <rect x="0" y="466" width="1920" height="6" fill="url(#underLed)" opacity="0.18"/>
+
+  <!-- lower cabinets -->
+  <rect x="0" y="480" width="1920" height="320" fill="url(#cab)"/>
+  <g stroke="#0B1220" stroke-width="2">
+    <line x1="240"  y1="480" x2="240"  y2="800"/>
+    <line x1="480"  y1="480" x2="480"  y2="800"/>
+    <line x1="720"  y1="480" x2="720"  y2="800"/>
+    <line x1="960"  y1="480" x2="960"  y2="800"/>
+    <line x1="1200" y1="480" x2="1200" y2="800"/>
+    <line x1="1440" y1="480" x2="1440" y2="800"/>
+    <line x1="1680" y1="480" x2="1680" y2="800"/>
+  </g>
+
+  <!-- subtle pendant fixture silhouettes -->
+  <g stroke="#1F2937" stroke-width="3">
+    <line x1="560" y1="0" x2="560" y2="60"/>
+    <line x1="960" y1="0" x2="960" y2="80"/>
+    <line x1="1360" y1="0" x2="1360" y2="60"/>
+  </g>
+  <g fill="#111827" stroke="#1F2937" stroke-width="2">
+    <circle cx="560"  cy="78" r="14"/>
+    <circle cx="960"  cy="98" r="16"/>
+    <circle cx="1360" cy="78" r="14"/>
+  </g>
+
+  <rect width="1920" height="800" fill="#000" opacity="0.15"/>
+
+  <g font-family="Inter, system-ui, sans-serif" fill="#374151">
+    <text x="1880" y="775" font-size="14" text-anchor="end" letter-spacing="2">VANTYX · CONCEPT</text>
+  </g>
+</svg>

@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 800" preserveAspectRatio="xMidYMid slice" role="img" aria-label="HVAC concept — sleek vent register with warm-to-cool climate gradient">
+  <defs>
+    <linearGradient id="climate" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0"   stop-color="#0F172A"/>
+      <stop offset="0.45" stop-color="#0EA5E9" stop-opacity="0.20"/>
+      <stop offset="0.55" stop-color="#F59E0B" stop-opacity="0.18"/>
+      <stop offset="1"   stop-color="#0F172A"/>
+    </linearGradient>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0B1220"/>
+      <stop offset="1" stop-color="#070B14"/>
+    </linearGradient>
+    <linearGradient id="metal" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#9CA3AF"/>
+      <stop offset="1" stop-color="#374151"/>
+    </linearGradient>
+    <filter id="soft"><feGaussianBlur stdDeviation="14"/></filter>
+  </defs>
+
+  <rect width="1920" height="800" fill="url(#bg)"/>
+  <rect width="1920" height="800" fill="url(#climate)" opacity="0.9"/>
+
+  <!-- ceiling band -->
+  <rect x="0" y="0" width="1920" height="240" fill="#050912"/>
+  <line x1="0" y1="240" x2="1920" y2="240" stroke="#1F2937" stroke-width="1" opacity="0.5"/>
+
+  <!-- vent register (ceiling-mounted, centered) -->
+  <rect x="780" y="120" width="360" height="90" rx="4" fill="#0F172A" stroke="#1F2937" stroke-width="2"/>
+  <rect x="800" y="138" width="320" height="54" rx="2" fill="#050912"/>
+  <!-- louver slats -->
+  <g stroke="url(#metal)" stroke-width="3">
+    <line x1="810" y1="148" x2="1110" y2="148"/>
+    <line x1="810" y1="158" x2="1110" y2="158"/>
+    <line x1="810" y1="168" x2="1110" y2="168"/>
+    <line x1="810" y1="178" x2="1110" y2="178"/>
+  </g>
+
+  <!-- cool airflow falling from vent -->
+  <g filter="url(#soft)" opacity="0.55">
+    <ellipse cx="900"  cy="380" rx="120" ry="40" fill="#7DD3FC"/>
+    <ellipse cx="1020" cy="380" rx="120" ry="40" fill="#7DD3FC"/>
+    <ellipse cx="940"  cy="500" rx="200" ry="60" fill="#7DD3FC"/>
+    <ellipse cx="960"  cy="640" rx="320" ry="80" fill="#7DD3FC" opacity="0.6"/>
+  </g>
+
+  <!-- warm pocket bottom-left for climate contrast -->
+  <g filter="url(#soft)" opacity="0.45">
+    <ellipse cx="280" cy="700" rx="280" ry="60" fill="#F59E0B"/>
+  </g>
+  <!-- cool pocket bottom-right -->
+  <g filter="url(#soft)" opacity="0.45">
+    <ellipse cx="1640" cy="700" rx="280" ry="60" fill="#0EA5E9"/>
+  </g>
+
+  <!-- subtle horizon -->
+  <line x1="0" y1="660" x2="1920" y2="660" stroke="#1F2937" stroke-width="1" opacity="0.5"/>
+
+  <rect width="1920" height="800" fill="#000" opacity="0.18"/>
+
+  <g font-family="Inter, system-ui, sans-serif" fill="#374151">
+    <text x="1880" y="775" font-size="14" text-anchor="end" letter-spacing="2">VANTYX · CONCEPT</text>
+  </g>
+</svg>
