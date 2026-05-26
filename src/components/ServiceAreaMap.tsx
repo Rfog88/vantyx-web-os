@@ -24,7 +24,8 @@ function zoomForRadius(radiusMiles: number): number {
 export function ServiceAreaMap({ config }: { config: SiteConfig }) {
   const [lat, lng] = config.serviceArea.hqLatLng;
   const zoom = zoomForRadius(config.serviceArea.radiusMiles);
-  const mapUrl = buildMapboxUrl(config.serviceAreaPins, lat, lng, zoom);
+  const pins = config.serviceAreaPins ?? [];
+  const mapUrl = buildMapboxUrl(pins, lat, lng, zoom);
 
   return (
     <section className="bg-white py-16 md:py-24" id="service-area">
@@ -58,7 +59,7 @@ export function ServiceAreaMap({ config }: { config: SiteConfig }) {
               Service areas
             </h3>
             <ul className="flex flex-wrap gap-2">
-              {(config.serviceAreaPins ?? []).map((pin) => (
+              {pins.map((pin) => (
                 <li
                   key={`${pin.city}-${pin.lat}-${pin.lng}`}
                   className="rounded bg-white px-2 py-1 text-xs font-medium text-brand-text ring-1 ring-gray-200"
