@@ -5,8 +5,8 @@ function buildMapboxUrl(markers: SiteConfig["serviceAreaPins"], lat: number, lng
   const token = process.env.MAPBOX_TOKEN;
   if (!token) return null;
   const style = "light-v11";
-  const markerSegments = markers.length
-    ? markers.map((pin) => `pin-s-marker+f59e0b(${pin.lng},${pin.lat})`)
+  const markerSegments = (markers ?? []).length
+    ? (markers ?? []).map((pin) => `pin-s-marker+f59e0b(${pin.lng},${pin.lat})`)
     : [`pin-l-marker+f59e0b(${lng},${lat})`];
   const markerOverlay = markerSegments.join(",");
   const marker = markerSegments[0];
@@ -58,7 +58,7 @@ export function ServiceAreaMap({ config }: { config: SiteConfig }) {
               Service areas
             </h3>
             <ul className="flex flex-wrap gap-2">
-              {config.serviceAreaPins.map((pin) => (
+              {(config.serviceAreaPins ?? []).map((pin) => (
                 <li
                   key={`${pin.city}-${pin.lat}-${pin.lng}`}
                   className="rounded bg-white px-2 py-1 text-xs font-medium text-brand-text ring-1 ring-gray-200"

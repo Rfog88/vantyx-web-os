@@ -3,10 +3,7 @@ import { LICENSE_VERIFICATION_PENDING, sanitizeLicenseNumber } from "@/lib/licen
 
 function buildLocalBusinessJsonLd(config: SiteConfig) {
   const { business, contact, serviceArea, hero } = config;
-<<<<<<< HEAD
   const normalizedLicense = sanitizeLicenseNumber(business.licenseNumber);
-=======
->>>>>>> 34485d5 (fix(VAN-143): align license render with Board policy 06e8edd9)
   const serviceAreaPins = config.serviceAreaPins ?? [];
   const areaServed =
     serviceAreaPins.length > 0

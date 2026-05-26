@@ -64,7 +64,13 @@ export type SiteConfig = {
     before?: string;
     after?: string;
     caption?: string;
+    city?: string;
+    placeholderSlot?: string;
   }>;
+  galleryCta?: {
+    href: string;
+    label: string;
+  };
   branding: {
     palette: {
       primary: string;                // e.g. "#0F172A"
