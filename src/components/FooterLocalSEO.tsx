@@ -64,6 +64,8 @@ export function FooterLocalSEO({ config }: { config: SiteConfig }) {
       ? LICENSE_VERIFICATION_PENDING
       : `License #${normalizedLicense}`
     : null;
+  const isPendingLicense = normalizedLicense === LICENSE_VERIFICATION_PENDING;
+
   return (
     <footer className="bg-brand-primary py-12 text-white/80" data-local-seo="footer">
       <div className="mx-auto max-w-5xl px-6">
@@ -83,23 +85,29 @@ export function FooterLocalSEO({ config }: { config: SiteConfig }) {
               )
             )}
             {licenseLabel ? (
-              licenseLabel === LICENSE_VERIFICATION_PENDING ? (
+              <p
+                className="mt-3 text-xs tabular text-white/60"
+                data-license-label="present"
+                {...(isPendingLicense
+                  ? {
+                      "data-vantyx-license-state": "pending",
+                      "aria-label": "License verification is pending",
+                    }
+                  : {})}
+              >
+                {licenseLabel}
+              </p>
+            ) : (
+              process.env.NODE_ENV !== "production" && (
                 <p
-                  className="mt-3 text-xs tabular text-white/60"
+                  data-vantyx-missing="licenseNumber"
                   data-placeholder-slot="license"
-                  aria-label="Concept demo: license verification pending"
+                  className="mt-3 text-xs tabular text-red-300 ring-1 ring-red-400/40 px-1"
                 >
-                  {licenseLabel}
-                </p>
-              ) : (
-                <p
-                  className="mt-3 text-xs tabular text-white/60"
-                  data-license-label="present"
-                >
-                  {licenseLabel}
+                  [missing: license #]
                 </p>
               )
-            ) : null}
+            )}
           </div>
 
           <div>
