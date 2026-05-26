@@ -1,11 +1,31 @@
 import type { SiteConfig } from "@/lib/site-config";
+import { LICENSE_VERIFICATION_PENDING, sanitizeLicenseNumber } from "@/lib/license";
 
 function buildLocalBusinessJsonLd(config: SiteConfig) {
   const { business, contact, serviceArea, hero } = config;
+  const normalizedLicense = sanitizeLicenseNumber(business.licenseNumber);
+  const serviceAreaPins = config.serviceAreaPins ?? [];
+  const areaServed =
+    serviceAreaPins.length > 0
+      ? serviceAreaPins.map((pin) => ({
+          "@type": "City",
+          name: `${pin.city}, ${contact.address.state}`,
+          geo: {
+            "@type": "GeoCoordinates",
+            latitude: pin.lat,
+            longitude: pin.lng,
+          },
+        }))
+      : serviceArea.zips.map((z) => ({
+          "@type": "PostalCodeSpecification",
+          postalCode: z,
+        }));
+
   return {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
     name: business.legalName || business.name,
+    license: normalizedLicense ?? LICENSE_VERIFICATION_PENDING,
     description: business.tagline,
     telephone: contact.phone,
     email: contact.email,
@@ -22,10 +42,7 @@ function buildLocalBusinessJsonLd(config: SiteConfig) {
       latitude: serviceArea.hqLatLng[0],
       longitude: serviceArea.hqLatLng[1],
     },
-    areaServed: serviceArea.zips.map((z) => ({
-      "@type": "PostalCodeSpecification",
-      postalCode: z,
-    })),
+    areaServed,
     openingHours: Object.entries(contact.hours)
       .filter(([, v]) => v && v.toLowerCase() !== "closed")
       .map(([day, v]) => `${day.slice(0, 2).toUpperCase()} ${v.replace(/\s/g, "")}`),
@@ -41,9 +58,14 @@ function buildLocalBusinessJsonLd(config: SiteConfig) {
 
 export function FooterLocalSEO({ config }: { config: SiteConfig }) {
   const jsonLd = buildLocalBusinessJsonLd(config);
-
+  const normalizedLicense = sanitizeLicenseNumber(config.business.licenseNumber);
+  const licenseLabel = normalizedLicense
+    ? normalizedLicense === LICENSE_VERIFICATION_PENDING
+      ? LICENSE_VERIFICATION_PENDING
+      : `License #${normalizedLicense}`
+    : null;
   return (
-    <footer className="bg-brand-primary py-12 text-white/80">
+    <footer className="bg-brand-primary py-12 text-white/80" data-local-seo="footer">
       <div className="mx-auto max-w-5xl px-6">
         <div className="grid gap-8 md:grid-cols-3">
           <div>
@@ -60,20 +82,24 @@ export function FooterLocalSEO({ config }: { config: SiteConfig }) {
                 </p>
               )
             )}
-            {config.business.licenseNumber ? (
-              <p className="mt-3 text-xs tabular text-white/60">
-                License #{config.business.licenseNumber}
-              </p>
-            ) : (
-              process.env.NODE_ENV !== "production" && (
+            {licenseLabel ? (
+              licenseLabel === LICENSE_VERIFICATION_PENDING ? (
                 <p
-                  data-vantyx-missing="licenseNumber"
-                  className="mt-3 text-xs tabular text-red-300 ring-1 ring-red-400/40 px-1"
+                  className="mt-3 text-xs tabular text-white/60"
+                  data-placeholder-slot="license"
+                  aria-label="Concept demo: license verification pending"
                 >
-                  [missing: license #]
+                  {licenseLabel}
+                </p>
+              ) : (
+                <p
+                  className="mt-3 text-xs tabular text-white/60"
+                  data-license-label="present"
+                >
+                  {licenseLabel}
                 </p>
               )
-            )}
+            ) : null}
           </div>
 
           <div>
@@ -100,31 +126,28 @@ export function FooterLocalSEO({ config }: { config: SiteConfig }) {
           </div>
         </div>
 
-        <div className="mt-8 flex flex-wrap gap-3 border-t border-white/10 pt-6">
-          {["LICENSED", "INSURED", "PROFESSIONAL"].map((badge) => (
-            <span
-              key={badge}
-              className="rounded-full border border-white/20 bg-white/5 px-3 py-1 text-[11px] font-semibold tracking-[0.16em] text-white/85"
-            >
-              {badge}
-            </span>
-          ))}
-        </div>
-
         <div className="mt-8 border-t border-white/10 pt-6 text-xs text-white/50">
           <p>
             © {new Date().getFullYear()} {config.business.legalName || config.business.name}. All rights reserved.
           </p>
           <p className="mt-1">
             Site built by{" "}
-            <a href="https://vantyx.com" className="text-brand-accent hover:underline">
-              Vantyx
-            </a>
+              <a
+                href="https://vantyx.com"
+                className="text-brand-accent hover:underline"
+                target="_blank"
+                rel="noopener noreferrer"
+                data-agency-link="vantyx"
+              >
+                Vantyx
+              </a>
             .
           </p>
         </div>
 
         <script
+          id="local-business-jsonld"
+          data-schema="local-business"
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />

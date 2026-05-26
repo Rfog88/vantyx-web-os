@@ -8,6 +8,10 @@
  */
 
 export type SiteConfig = {
+  niche?: string;
+  trustItems?: Array<{
+    label: string;
+  }>;
   business: {
     name: string;
     legalName?: string;
@@ -43,7 +47,7 @@ export type SiteConfig = {
     hqLatLng: [number, number];      // [lat, lng]
     radiusMiles: number;
   };
-  serviceAreaPins: Array<{
+  serviceAreaPins?: Array<{
     city: string;
     lat: number;
     lng: number;
@@ -57,16 +61,10 @@ export type SiteConfig = {
     src: string;
     alt: string;
     type?: "before-after" | "project";
-    placeholderSlot?: string;
-    city?: string;
     before?: string;
     after?: string;
     caption?: string;
   }>;
-  galleryCta?: {
-    href: string;
-    label?: string;
-  };
   branding: {
     palette: {
       primary: string;                // e.g. "#0F172A"
@@ -82,6 +80,7 @@ export type SiteConfig = {
   };
   hero: {
     image: string;                    // background image URL
+    imageSource?: string;
     service: string;                  // e.g. "Electrician"
     city: string;                     // e.g. "Lima, OH"
     headline?: string;                // override default `{service} in {city}`
@@ -98,5 +97,7 @@ export type SiteConfig = {
     rating: number;                   // 1–5
     body?: string;                    // alias of `quote` — VAN-42 source-of-truth field
     location?: string;                // e.g. "Lima, OH"
+    publishedAt?: string;
+    source?: "gbp" | string;
   }>;
 };
