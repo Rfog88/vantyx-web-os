@@ -44,6 +44,13 @@ export const siteConfig: SiteConfig = {
     hqLatLng: [40.7426, -84.1052],
     radiusMiles: 50,
   },
+  serviceAreaPins: [
+    { city: "Lima", lat: 40.7426, lng: -84.1052 },
+    { city: "Findlay", lat: 41.0442, lng: -83.6499 },
+    { city: "Toledo", lat: 41.6528, lng: -83.5379 },
+    { city: "Fostoria", lat: 41.1620, lng: -83.4166 },
+    { city: "Bowling Green", lat: 41.3745, lng: -83.6515 },
+  ],
   services: [
     { title: "Panel Upgrades", description: "100A → 200A service upgrades, code-compliant in a day.", icon: "Zap" },
     { title: "EV Chargers", description: "Level 2 home charger installs. Tesla, ChargePoint, JuiceBox.", icon: "BatteryCharging" },
@@ -53,10 +60,13 @@ export const siteConfig: SiteConfig = {
     { title: "Emergency Calls", description: "Outage, sparking outlet, burning smell? Same-day.", icon: "AlertTriangle" },
   ],
   gallery: [
-    { src: "/gallery/panel-before.jpg", alt: "Panel upgrade — before", type: "before-after" },
-    { src: "/gallery/panel-after.jpg", alt: "Panel upgrade — after", type: "before-after" },
-    { src: "/gallery/ev-charger.jpg", alt: "EV charger install", type: "project" },
+    { src: "/gallery/panel-before.jpg", alt: "Panel upgrade — before", type: "before-after", city: "Troy, OH", placeholderSlot: "recent-work-1" },
+    { src: "/gallery/panel-after.jpg", alt: "Panel upgrade — after", type: "before-after", city: "Troy, OH", placeholderSlot: "recent-work-2" },
   ],
+  galleryCta: {
+    href: "/work",
+    label: "VIEW MORE PROJECTS",
+  },
   branding: {
     palette: {
       primary: "#0F172A",

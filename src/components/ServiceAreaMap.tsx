@@ -1,12 +1,16 @@
 import type { SiteConfig } from "@/lib/site-config";
 import { MapPin } from "lucide-react";
 
-function buildMapboxUrl(lat: number, lng: number, zoom: number, w = 800, h = 400): string | null {
+function buildMapboxUrl(markers: SiteConfig["serviceAreaPins"], lat: number, lng: number, zoom: number, w = 800, h = 400): string | null {
   const token = process.env.MAPBOX_TOKEN;
   if (!token) return null;
   const style = "light-v11";
-  const marker = `pin-l-marker+f59e0b(${lng},${lat})`;
-  return `https://api.mapbox.com/styles/v1/mapbox/${style}/static/${marker}/${lng},${lat},${zoom},0/${w}x${h}@2x?access_token=${token}`;
+  const markerSegments = markers.length
+    ? markers.map((pin) => `pin-s-marker+f59e0b(${pin.lng},${pin.lat})`)
+    : [`pin-l-marker+f59e0b(${lng},${lat})`];
+  const markerOverlay = markerSegments.join(",");
+  const marker = markerSegments[0];
+  return `https://api.mapbox.com/styles/v1/mapbox/${style}/static/${markerOverlay}/${marker}/${lng},${lat},${zoom},0/${w}x${h}@2x?access_token=${token}`;
 }
 
 function zoomForRadius(radiusMiles: number): number {
@@ -20,7 +24,7 @@ function zoomForRadius(radiusMiles: number): number {
 export function ServiceAreaMap({ config }: { config: SiteConfig }) {
   const [lat, lng] = config.serviceArea.hqLatLng;
   const zoom = zoomForRadius(config.serviceArea.radiusMiles);
-  const mapUrl = buildMapboxUrl(lat, lng, zoom);
+  const mapUrl = buildMapboxUrl(config.serviceAreaPins, lat, lng, zoom);
 
   return (
     <section className="bg-white py-16 md:py-24" id="service-area">
@@ -51,12 +55,15 @@ export function ServiceAreaMap({ config }: { config: SiteConfig }) {
 
           <aside className="rounded-lg bg-gray-50 p-5">
             <h3 className="mb-3 text-sm font-semibold uppercase tracking-wider text-brand-muted">
-              ZIPs we cover
+              Service areas
             </h3>
             <ul className="flex flex-wrap gap-2">
-              {config.serviceArea.zips.map((z) => (
-                <li key={z} className="tabular rounded bg-white px-2 py-1 text-xs font-medium text-brand-text ring-1 ring-gray-200">
-                  {z}
+              {config.serviceAreaPins.map((pin) => (
+                <li
+                  key={`${pin.city}-${pin.lat}-${pin.lng}`}
+                  className="rounded bg-white px-2 py-1 text-xs font-medium text-brand-text ring-1 ring-gray-200"
+                >
+                  {pin.city}
                 </li>
               ))}
             </ul>

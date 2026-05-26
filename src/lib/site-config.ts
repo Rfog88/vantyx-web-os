@@ -43,6 +43,11 @@ export type SiteConfig = {
     hqLatLng: [number, number];      // [lat, lng]
     radiusMiles: number;
   };
+  serviceAreaPins: Array<{
+    city: string;
+    lat: number;
+    lng: number;
+  }>;
   services: Array<{
     title: string;
     description: string;
@@ -52,10 +57,16 @@ export type SiteConfig = {
     src: string;
     alt: string;
     type?: "before-after" | "project";
+    placeholderSlot?: string;
+    city?: string;
     before?: string;
     after?: string;
     caption?: string;
   }>;
+  galleryCta?: {
+    href: string;
+    label?: string;
+  };
   branding: {
     palette: {
       primary: string;                // e.g. "#0F172A"

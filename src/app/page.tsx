@@ -1,5 +1,6 @@
 import { siteConfig } from "@site-config";
 import { EmergencyBanner } from "@/components/EmergencyBanner";
+import { TopNavHeader } from "@/components/TopNavHeader";
 import { HeroLocal } from "@/components/HeroLocal";
 import { TrustBar } from "@/components/TrustBar";
 import { ServicesGrid } from "@/components/ServicesGrid";
@@ -14,6 +15,7 @@ export default function HomePage() {
   return (
     <main className="min-h-screen">
       {siteConfig.contact.emergency24_7 && <EmergencyBanner config={siteConfig} />}
+      <TopNavHeader config={siteConfig} />
       <HeroLocal config={siteConfig} />
       <TrustBar config={siteConfig} />
       <ServicesGrid config={siteConfig} />

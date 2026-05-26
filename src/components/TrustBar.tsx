@@ -31,7 +31,7 @@ export function TrustBar({ config }: { config: SiteConfig }) {
   });
 
   return (
-    <section className="border-b border-gray-200 bg-white">
+    <section id="about" className="border-b border-gray-200 bg-white">
       <div className="mx-auto grid max-w-5xl grid-cols-2 gap-4 px-6 py-6 sm:grid-cols-4">
         {items.map((item, i) => (
           <div key={i} className="flex items-center gap-2 text-sm font-medium text-brand-text">

@@ -100,6 +100,17 @@ export function FooterLocalSEO({ config }: { config: SiteConfig }) {
           </div>
         </div>
 
+        <div className="mt-8 flex flex-wrap gap-3 border-t border-white/10 pt-6">
+          {["LICENSED", "INSURED", "PROFESSIONAL"].map((badge) => (
+            <span
+              key={badge}
+              className="rounded-full border border-white/20 bg-white/5 px-3 py-1 text-[11px] font-semibold tracking-[0.16em] text-white/85"
+            >
+              {badge}
+            </span>
+          ))}
+        </div>
+
         <div className="mt-8 border-t border-white/10 pt-6 text-xs text-white/50">
           <p>
             © {new Date().getFullYear()} {config.business.legalName || config.business.name}. All rights reserved.

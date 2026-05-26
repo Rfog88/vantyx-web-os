@@ -13,7 +13,7 @@ function ServiceIcon({ name }: { name?: string }) {
 
 export function ServicesGrid({ config }: { config: SiteConfig }) {
   return (
-    <section className="bg-gray-50 py-16 md:py-24">
+    <section id="services" className="bg-gray-50 py-16 md:py-24">
       <div className="mx-auto max-w-5xl px-6">
         <header className="mb-10 max-w-2xl">
           <p className="text-sm font-semibold uppercase tracking-wider text-brand-accent">

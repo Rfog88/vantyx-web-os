@@ -6,7 +6,7 @@ export function EmergencyBanner({ config }: { config: SiteConfig }) {
   return (
     <a
       href={telLink(config.contact.phone)}
-      className="sticky top-0 z-50 flex items-center justify-center gap-2 bg-brand-accent px-4 py-2 text-sm font-semibold text-brand-primary md:text-base"
+      className="flex items-center justify-center gap-2 bg-brand-accent px-4 py-2 text-sm font-semibold text-brand-primary md:text-base"
       aria-label="Call 24/7 emergency line"
     >
       <Phone className="h-4 w-4" aria-hidden="true" />

@@ -1,5 +1,5 @@
 import type { SiteConfig } from "@/lib/site-config";
-import { Star, Quote } from "lucide-react";
+import { TestimonialsCarousel } from "@/components/TestimonialsCarousel";
 
 type Review = {
   author_name: string;
@@ -46,43 +46,11 @@ export async function GoogleReviewsEmbed({ config }: { config: SiteConfig }) {
   if (reviews.length === 0) return null;
 
   return (
-    <section className="bg-white py-16 md:py-24">
-      <div className="mx-auto max-w-5xl px-6">
-        <header className="mb-10 flex items-end justify-between gap-4">
-          <div>
-            <p className="text-sm font-semibold uppercase tracking-wider text-brand-accent">
-              {live ? "Live Google Reviews" : "What our customers say"}
-            </p>
-            <h2 className="mt-2 text-3xl font-bold text-brand-primary md:text-4xl">
-              Trusted by {config.hero.city} homeowners
-            </h2>
-          </div>
-        </header>
-
-        <ul className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {reviews.slice(0, 6).map((r, i) => (
-            <li key={i} className="rounded-lg border border-gray-200 bg-gray-50 p-5">
-              <div className="mb-3 flex items-center justify-between">
-                <div className="flex items-center" aria-label={`${r.rating} stars`}>
-                  {Array.from({ length: 5 }).map((_, k) => (
-                    <Star
-                      key={k}
-                      className={k < r.rating ? "h-4 w-4 fill-brand-accent text-brand-accent" : "h-4 w-4 text-gray-300"}
-                      aria-hidden="true"
-                    />
-                  ))}
-                </div>
-                <Quote className="h-5 w-5 text-brand-muted" aria-hidden="true" />
-              </div>
-              <p className="mb-3 text-sm leading-relaxed text-brand-text">{r.text}</p>
-              <p className="text-xs font-medium text-brand-muted">
-                — {r.author_name}
-                {r.relative_time_description ? ` · ${r.relative_time_description}` : ""}
-              </p>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </section>
+    <TestimonialsCarousel
+      reviews={reviews.slice(0, 6)}
+      subhead={live ? "Live Google Reviews" : "What our customers say"}
+      headline={`Trusted by ${config.hero.city} homeowners`}
+      sectionId="reviews"
+    />
   );
 }

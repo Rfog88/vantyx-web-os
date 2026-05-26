@@ -9,7 +9,7 @@ export function HeroLocal({ config }: { config: SiteConfig }) {
   const subhead = hero.subhead || `${business.foundedYear ? `Serving ${hero.city} since ${business.foundedYear}` : `Local, licensed, insured`}.`;
 
   return (
-    <section className="relative isolate overflow-hidden bg-brand-primary text-white">
+    <section id="home" className="relative isolate overflow-hidden bg-brand-primary text-white">
       <div className="absolute inset-0 -z-10">
         <Image
           src={hero.image}
@@ -51,7 +51,7 @@ export function HeroLocal({ config }: { config: SiteConfig }) {
             <span className="tabular">{contact.phone}</span>
           </a>
           <a
-            href="#book"
+            href="#contact"
             className="inline-flex items-center justify-center gap-2 rounded-md border border-white/40 bg-white/5 px-6 py-3 text-base font-semibold text-white transition hover:bg-white/10"
           >
             Get a Free Quote

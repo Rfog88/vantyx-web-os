@@ -21,7 +21,7 @@ export function FinancingCTA({ config }: { config: SiteConfig }) {
           </div>
         </div>
         <a
-          href="#book"
+          href="#contact"
           className="inline-flex items-center justify-center rounded-md bg-brand-accent px-6 py-3 text-base font-semibold text-brand-primary transition hover:brightness-95"
         >
           See if you qualify

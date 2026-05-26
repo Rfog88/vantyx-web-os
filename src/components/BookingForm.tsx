@@ -55,7 +55,7 @@ async function submitBooking(formData: FormData): Promise<void> {
 
 export function BookingForm({ config }: { config: SiteConfig }) {
   return (
-    <section id="book" className="bg-gray-50 py-16 md:py-24">
+    <section id="contact" className="bg-gray-50 py-16 md:py-24">
       <div className="mx-auto max-w-3xl px-6">
         <header className="mb-8 text-center">
           <p className="text-sm font-semibold uppercase tracking-wider text-brand-accent">
