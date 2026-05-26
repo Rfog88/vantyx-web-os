@@ -90,6 +90,7 @@ export function FooterLocalSEO({ config }: { config: SiteConfig }) {
                 data-license-label="present"
                 {...(isPendingLicense
                   ? {
+                      "data-placeholder-slot": "license",
                       "data-vantyx-license-state": "pending",
                       "aria-label": "License verification is pending",
                     }
