@@ -8,6 +8,7 @@ type Review = {
   rating: number;
   text: string;
   relative_time_description?: string;
+  source?: string;
 };
 
 export function TestimonialsCarousel({
@@ -22,6 +23,14 @@ export function TestimonialsCarousel({
   sectionId?: string;
 }) {
   const [activeIndex, setActiveIndex] = useState(0);
+  const toSourceToken = (source?: string) => {
+    if (!source) return undefined;
+    const normalized = source.trim().toLowerCase();
+    if (!normalized) return undefined;
+    if (normalized.includes("google") || normalized === "gbp") return "google";
+    return normalized.replace(/\s+/g, "-");
+  };
+
   const goToNext = () => setActiveIndex((current) => (current + 1) % reviews.length);
   const goToPrev = () => setActiveIndex((current) => (current - 1 + reviews.length) % reviews.length);
 
@@ -56,7 +65,7 @@ export function TestimonialsCarousel({
           >
             {reviews.map((r, i) => (
               <li key={i} className="w-full shrink-0" data-placeholder-slot="testimonial">
-                <article className="rounded-lg border border-gray-200 bg-gray-50 p-6">
+                <article className="rounded-lg border border-gray-200 bg-gray-50 p-6" data-source={toSourceToken(r.source)}>
                   <div className="mb-3 flex items-center justify-between">
                     <div className="flex items-center" aria-label={`${r.rating} stars`}>
                       {Array.from({ length: 5 }).map((_, k) => (
@@ -75,6 +84,9 @@ export function TestimonialsCarousel({
                     — {r.author_name}
                     {r.relative_time_description ? ` · ${r.relative_time_description}` : ""}
                   </p>
+                  {r.source ? (
+                    <p className="mt-2 text-xs font-semibold tracking-wide text-brand-muted">via {r.source}</p>
+                  ) : null}
                 </article>
               </li>
             ))}

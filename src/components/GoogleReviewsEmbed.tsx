@@ -6,7 +6,25 @@ type Review = {
   rating: number;
   text: string;
   relative_time_description?: string;
+  source?: string;
 };
+
+type SourcedRating = {
+  author?: string;
+  quote?: string;
+  body?: string;
+  rating?: number;
+  source?: string;
+  relative_time_description?: string;
+};
+
+function normalizeSourceLabel(source?: string): string | undefined {
+  if (!source) return undefined;
+  const normalized = source.trim().toLowerCase();
+  if (!normalized) return undefined;
+  if (normalized === "gbp" || normalized.includes("google")) return "Google";
+  return undefined;
+}
 
 async function fetchGoogleReviews(placeId?: string): Promise<Review[] | null> {
   const apiKey = process.env.GOOGLE_PLACES_API_KEY;
@@ -28,6 +46,7 @@ async function fetchGoogleReviews(placeId?: string): Promise<Review[] | null> {
 
 export async function GoogleReviewsEmbed({ config }: { config: SiteConfig }) {
   const live = await fetchGoogleReviews(config.business.googlePlaceId);
+  const sourcedRatings = (config as SiteConfig & { sourced_ratings?: SourcedRating[] }).sourced_ratings;
 
   const reviews: Review[] =
     live?.map((r) => ({
@@ -35,11 +54,20 @@ export async function GoogleReviewsEmbed({ config }: { config: SiteConfig }) {
       rating: r.rating,
       text: r.text,
       relative_time_description: r.relative_time_description,
+      source: "Google",
     })) ||
+    sourcedRatings?.map((r) => ({
+      author_name: r.author || "Verified Customer",
+      rating: r.rating || 5,
+      text: r.body || r.quote || "",
+      relative_time_description: r.relative_time_description,
+      source: normalizeSourceLabel(r.source),
+    }))?.filter((r) => r.text) ||
     config.testimonials?.map((t) => ({
       author_name: t.author,
       rating: t.rating,
-      text: t.quote,
+      text: t.body || t.quote,
+      source: normalizeSourceLabel(t.source),
     })) ||
     [];
 
