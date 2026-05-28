@@ -6,6 +6,7 @@
  * type cannot safely live there. Components import the type from here;
  * they import the populated `siteConfig` value from `@site-config`.
  */
+import { siteConfig as rawSiteConfig } from "@site-config";
 
 export type SiteConfig = {
   niche?: string;
@@ -107,3 +108,36 @@ export type SiteConfig = {
     source?: "gbp" | string;
   }>;
 };
+
+const PLACEHOLDER_LICENSE_RE = /^x{4,}$|^0{4,}$|^9{4,}$|^-{4,}$|^placeholder$|^tbd$|^unknown$|^(?:(?:license\s+)?verification\s+pending|license\s+pending|pending)$/i;
+const PLACEHOLDER_GOOGLE_PLACE_RE = /^chij(?:x+|0+|9+|-+)$/i;
+
+function normalizeOptionalString(value: string | undefined): string | undefined {
+  const trimmed = value?.trim();
+  return trimmed ? trimmed : undefined;
+}
+
+function sanitizeLicenseForConfig(licenseNumber: string | undefined): string | undefined {
+  const normalized = normalizeOptionalString(licenseNumber);
+  if (!normalized) return undefined;
+  return PLACEHOLDER_LICENSE_RE.test(normalized) ? undefined : normalized;
+}
+
+function sanitizeGooglePlaceIdForConfig(googlePlaceId: string | undefined): string | undefined {
+  const normalized = normalizeOptionalString(googlePlaceId);
+  if (!normalized) return undefined;
+  return PLACEHOLDER_GOOGLE_PLACE_RE.test(normalized) ? undefined : normalized;
+}
+
+export function sanitizeSiteConfig(input: SiteConfig): SiteConfig {
+  return {
+    ...input,
+    business: {
+      ...input.business,
+      licenseNumber: sanitizeLicenseForConfig(input.business.licenseNumber),
+      googlePlaceId: sanitizeGooglePlaceIdForConfig(input.business.googlePlaceId),
+    },
+  };
+}
+
+export const siteConfig = sanitizeSiteConfig(rawSiteConfig as SiteConfig);

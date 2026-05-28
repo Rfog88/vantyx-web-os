@@ -1,4 +1,4 @@
-import { siteConfig } from "@site-config";
+import { siteConfig } from "@/lib/site-config";
 import { EmergencyBanner } from "@/components/EmergencyBanner";
 import { TopNavHeader } from "@/components/TopNavHeader";
 import { HeroLocal } from "@/components/HeroLocal";

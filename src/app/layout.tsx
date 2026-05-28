@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { siteConfig } from "@site-config";
+import { siteConfig } from "@/lib/site-config";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -19,7 +19,17 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const { palette, fonts } = siteConfig.branding;
+  const palette = siteConfig.branding?.palette ?? {
+    primary: "#0F172A",
+    accent: "#F59E0B",
+    bg: "#FFFFFF",
+    text: "#111827",
+    muted: "#6B7280",
+  };
+  const fonts = siteConfig.branding?.fonts ?? {
+    headings: "Inter, system-ui, sans-serif",
+    body: "Inter, system-ui, sans-serif",
+  };
   const styleVars = {
     "--vantyx-primary": palette.primary,
     "--vantyx-accent": palette.accent,
