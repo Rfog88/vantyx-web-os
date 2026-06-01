@@ -1,0 +1,24 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Next.js
+.next/
+out/
+build/
+dist/
+
+# Env / secrets — never commit the Stitch API key
+.env
+.env.local
+.env*.local
+
+# Vercel
+.vercel
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.log
+npm-debug.log*
