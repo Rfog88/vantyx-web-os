@@ -27,7 +27,7 @@ export interface ServicePageContent {
   included: { eyebrow: string; heading: string; items: ChecklistItem[] };
   process: { eyebrow: string; heading: string; steps: ProcessStep[] };
   faq: { eyebrow?: string; heading: string; items: FaqItem[] };
-  financing: SiteContent["financing"];
+  financing: NonNullable<SiteContent["financing"]>;
   gallery: { eyebrow?: string; heading: string; caption: string; count: number };
   related: { eyebrow: string; heading: string; items: Service[] };
 }

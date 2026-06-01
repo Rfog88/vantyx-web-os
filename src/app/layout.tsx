@@ -1,11 +1,10 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { themeClass } from "@/config/active-site";
+import { themeClass, activeSite } from "@/config/active-site";
 
 export const metadata: Metadata = {
-  title: "Vantyx Web OS — House Style",
-  description:
-    "Navy + gold house-style design system and component library for trades websites.",
+  title: `${activeSite.content.business.name} | Licensed Electrician`,
+  description: activeSite.content.hero.lede,
 };
 
 export default function RootLayout({

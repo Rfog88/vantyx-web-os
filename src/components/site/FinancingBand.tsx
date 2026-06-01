@@ -5,7 +5,7 @@ import { Eyebrow } from "@/components/ui/Eyebrow";
 export function FinancingBand({
   financing,
 }: {
-  financing: SiteContent["financing"];
+  financing: NonNullable<SiteContent["financing"]>;
 }) {
   return (
     <section className="bg-inverse-surface text-on-inverse">

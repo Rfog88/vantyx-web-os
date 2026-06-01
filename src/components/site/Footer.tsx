@@ -15,8 +15,7 @@ export function Footer({
             {business.name}
           </p>
           <p className="text-body-lede mt-3 max-w-xs text-on-inverse-muted">
-            Trustworthy, licensed electrical work for homes and businesses across
-            the Midlands.
+            Trustworthy, licensed electrical work for homes and businesses.
           </p>
         </div>
         {footer.columns.map((col) => (

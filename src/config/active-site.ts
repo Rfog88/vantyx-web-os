@@ -1,5 +1,5 @@
 import type { SiteContent } from "@/content/types";
-import { midlandsElectric } from "@/content/midlands-electric";
+import { brandonElectric } from "@/content/brandon-electric";
 
 /*
  * The single switch that defines which customer this deployment renders.
@@ -21,7 +21,7 @@ export interface ActiveSite {
 }
 
 export const activeSite: ActiveSite = {
-  content: midlandsElectric,
+  content: brandonElectric,
   theme: "electric",
 };
 

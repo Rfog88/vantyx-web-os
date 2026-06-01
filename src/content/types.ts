@@ -107,7 +107,8 @@ export interface SiteContent {
     items: Service[];
   };
 
-  financing: {
+  /** Optional — omit for customers who don't offer financing (don't invent it). */
+  financing?: {
     eyebrow?: string;
     heading: string;
     lede: string;

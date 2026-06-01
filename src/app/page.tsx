@@ -32,7 +32,7 @@ export default function Home() {
           heading={site.services.heading}
           items={site.services.items}
         />
-        <FinancingBand financing={site.financing} />
+        {site.financing && <FinancingBand financing={site.financing} />}
         <Testimonials testimonials={site.testimonials} />
         <ServingAreaRow serviceAreas={site.serviceAreas} />
         <FinalCta finalCta={site.finalCta} business={site.business} />
