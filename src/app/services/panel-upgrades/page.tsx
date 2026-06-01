@@ -1,4 +1,4 @@
-import { midlandsElectric as site } from "@/content/midlands-electric";
+import { activeSite } from "@/config/active-site";
 import { panelUpgrades as svc } from "@/content/panel-upgrades";
 import {
   Header,
@@ -21,6 +21,8 @@ import {
  * site content; the page body comes from the service content. Same library, new
  * page type — proves the system extends beyond the home.
  */
+const site = activeSite.content;
+
 export default function PanelUpgradesPage() {
   return (
     <>

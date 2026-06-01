@@ -1,4 +1,4 @@
-import { midlandsElectric as site } from "@/content/midlands-electric";
+import { activeSite } from "@/config/active-site";
 import {
   Header,
   EmergencyBanner,
@@ -17,6 +17,8 @@ import {
  * config-toggled strip). Composed entirely from the library — the only inputs
  * are the `site` content object and the accent token. Swap those to rebrand.
  */
+const site = activeSite.content;
+
 export default function Home() {
   return (
     <>

@@ -47,6 +47,28 @@
   --radius-full: 9999px;
 }
 
+/*
+ * Theme variants (the anti-cookie-cutter dial). Default (Electric Gold) lives in
+ * tokens.css :root. Applying one of these classes to <body> swaps ONLY the accent
+ * pair per customer/vertical — structure, navy, and cream stay constant.
+ */
+.theme-copper {
+  --accent: #c2622d;
+  --accent-dark: #9e4f24;
+}
+.theme-hvac {
+  --accent: #1f86c2;
+  --accent-dark: #176a9b;
+}
+.theme-roofer {
+  --accent: #c22d26;
+  --accent-dark: #9e241f;
+}
+.theme-evergreen {
+  --accent: #1f9d55;
+  --accent-dark: #178045;
+}
+
 /* Base */
 html {
   -webkit-text-size-adjust: 100%;
