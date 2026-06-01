@@ -17,6 +17,9 @@ dist/
 # Vercel
 .vercel
 
+# Local pipeline test fixtures (real lead rows — not committed)
+pipeline-fixtures/
+
 # OS / editor
 .DS_Store
 Thumbs.db

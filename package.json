@@ -8,7 +8,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "shots": "node scripts/screenshot.mjs"
+    "shots": "node scripts/screenshot.mjs",
+    "gen": "node scripts/gen-site.mjs"
   },
   "dependencies": {
     "next": "^15.1.6",

@@ -5,6 +5,9 @@
  * PLACEHOLDERS (never stock photos or fabricated reviews) per the VAN-27 rule.
  */
 
+/** Accent theme per vertical (structure/navy/cream stay constant). */
+export type ThemeName = "electric" | "copper" | "hvac" | "roofer" | "evergreen";
+
 export type IconName =
   | "bolt"
   | "check"

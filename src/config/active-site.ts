@@ -1,30 +1,20 @@
-import type { SiteContent } from "@/content/types";
-import { brandonElectric } from "@/content/brandon-electric";
+import type { SiteContent, ThemeName } from "@/content/types";
+import { site, theme } from "@/content/_active.generated";
 
 /*
- * The single switch that defines which customer this deployment renders.
- * A proof site = point `content` at that customer's content file and set `theme`
- * to their vertical's accent. Nothing else changes — no markup edits.
- *
- *   theme: "electric" (default) | "copper" | "hvac" | "roofer" | "evergreen"
+ * The active customer for this deployment = whatever `_active.generated.ts`
+ * exports. Standalone, that's the committed default; in the demo-gen pipeline,
+ * `scripts/gen-site.mjs` regenerates `_active.generated.ts` from a lead row
+ * (deterministically, no LLM in the write path) before build + deploy.
  */
-export type ThemeName =
-  | "electric"
-  | "copper"
-  | "hvac"
-  | "roofer"
-  | "evergreen";
+export type { ThemeName };
 
 export interface ActiveSite {
   content: SiteContent;
   theme: ThemeName;
 }
 
-export const activeSite: ActiveSite = {
-  content: brandonElectric,
-  theme: "electric",
-};
+export const activeSite: ActiveSite = { content: site, theme };
 
 /** Body class that applies the active accent variant ("" for the default). */
-export const themeClass =
-  activeSite.theme === "electric" ? "" : `theme-${activeSite.theme}`;
+export const themeClass = theme === "electric" ? "" : `theme-${theme}`;
