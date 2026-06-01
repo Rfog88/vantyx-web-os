@@ -72,6 +72,12 @@ typography:
     fontWeight: '800'
     lineHeight: 36px
     letterSpacing: -0.01em
+  display-hero-mobile:
+    fontFamily: system-ui
+    fontSize: 32px
+    fontWeight: '800'
+    lineHeight: 36px
+    letterSpacing: -0.5px
 rounded:
   sm: 0.25rem
   DEFAULT: 0.375rem
@@ -89,6 +95,7 @@ spacing:
   gutter: 24px
   margin-mobile: 24px
   margin-desktop: 56px
+  max-width: 1200px
 fonts:
   primary: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif'
   display: 'Inter, system-ui, sans-serif'

@@ -21,28 +21,35 @@ These steps need an interactive Google sign-in, so they can't be automated.
 ### 1. Sign in to Stitch
 Open **https://stitch.withgoogle.com** and sign in with your Google account (free).
 
-### 2. Authenticate the Stitch MCP server — pick ONE:
+### 2. Authenticate the Stitch MCP server — API key (the simple, working path)
 
-**Option A — API key (simplest, no Google Cloud CLI):**
-1. In Stitch, get your API key (Settings → API / "Use with code").
-2. Set it as an environment variable so the MCP proxy can read it. In PowerShell, to
-   set it permanently for your user:
-   ```powershell
-   setx STITCH_API_KEY "paste-your-key-here"
-   ```
-   Then open a NEW terminal so the variable takes effect.
-
-**Option B — gcloud OAuth (if you prefer Google Cloud auth):**
-gcloud is **not installed** on this machine. Install the Google Cloud CLI, then in
-this session type the `!`-prefixed commands so the interactive login runs here:
+The proxy authenticates with **just `STITCH_API_KEY` in its environment** (confirmed in
+the SDK: the proxy throws on startup unless `STITCH_API_KEY` or `STITCH_ACCESS_TOKEN` is
+set). No Google OAuth, no `init` wizard needed. In Stitch, generate a key (Settings →
+"Use with code" / API), then set it permanently for your user in PowerShell:
+```powershell
+setx STITCH_API_KEY "paste-your-key-here"
 ```
-! gcloud auth login
-! gcloud beta services mcp enable stitch.googleapis.com
-```
+> ⚠️ `setx` only affects processes launched **after** it runs. You MUST then **fully quit
+> and relaunch Claude Code** (a complete restart — "Reload Window" does NOT rebuild the
+> process environment). The relaunched process inherits the key; the `stitch` MCP server
+> is a child process and inherits it in turn.
 
-### 3. Restart Claude Code
-The stitch skills and the new MCP server load on restart. Close and reopen Claude
-Code (or, in the VS Code extension, run **Developer: Reload Window**). Confirm with:
+Sanity-check the key out-of-band (optional):
+```powershell
+$env:STITCH_API_KEY = [Environment]::GetEnvironmentVariable("STITCH_API_KEY","User")
+npx -y @_davideast/stitch-mcp tool list_projects -o json   # returns {} when no projects yet, no auth error
+```
+> Ignore `stitch-mcp doctor` and the `init` wizard — `doctor` only checks the OAuth path
+> (reports "Not authenticated" even when the API key works), and `init`'s arrow-key menus
+> can't be driven through Claude Code's `!` prompt. The OAuth/gcloud route is an
+> alternative, not a requirement.
+
+### 3. Fully restart Claude Code
+**Completely quit and relaunch** Claude Code so the process picks up the new
+`STITCH_API_KEY` from the User environment. Do NOT rely on **Reload Window** — it
+reloads the UI but keeps the old process env, so the MCP server still won't see the key.
+Confirm with:
 ```
 /mcp
 ```

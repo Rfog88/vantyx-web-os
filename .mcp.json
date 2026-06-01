@@ -1,8 +1,12 @@
 {
   "mcpServers": {
     "stitch": {
-      "command": "npx",
-      "args": ["-y", "@_davideast/stitch-mcp", "proxy"]
+      "command": "powershell",
+      "args": [
+        "-NoProfile",
+        "-Command",
+        "$env:STITCH_API_KEY=[Environment]::GetEnvironmentVariable('STITCH_API_KEY','User'); npx -y @_davideast/stitch-mcp proxy"
+      ]
     }
   }
 }
