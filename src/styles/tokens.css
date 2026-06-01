@@ -1,0 +1,55 @@
+/*
+ * Vantyx house-style tokens — the SINGLE FILE you swap (or override) per customer.
+ * Mirrors .stitch/DESIGN.md frontmatter. To rebrand a customer, change ONLY the
+ * accent pair below (and optionally --primary / --primary-deep). Leave structure,
+ * navy, and cream intact. See "Theme Variants" in DESIGN.md.
+ *
+ *   Electric Gold (default): --accent #f0a800 / --accent-dark #d99500
+ *   Copper Plumb:            #c2622d / #9e4f24
+ *   HVAC Sky:                #1f86c2 / #176a9b
+ *   Roofer Red:              #c22d26 / #9e241f
+ *   Evergreen:               #1f9d55 / #178045
+ */
+
+:root {
+  /* Primary foundation (light surfaces) */
+  --surface: #ffffff;
+  --surface-warm: #f7f4ed;
+  --surface-container: #f7f4ed;
+  --surface-container-high: #efeadd;
+  --on-surface: #202638;
+  --on-surface-variant: #4a5468;
+  --muted: #6b7280;
+  --outline: #e5e1d6;
+
+  /* Inverse foundation (signature dark bands) */
+  --inverse-surface: #1a2238;
+  --inverse-surface-deep: #0d1a30;
+  --inverse-surface-card: #15233e;
+  --on-inverse: #ffffff;
+  --on-inverse-variant: #c8cad0;
+  --on-inverse-muted: #aab0bd;
+
+  /* Brand */
+  --primary: #1a2238;
+  --on-primary: #ffffff;
+  --primary-container: #15233e;
+
+  /* Accent / interactive (the one decisive CTA color — swap per customer) */
+  --accent: #f0a800;
+  --accent-dark: #d99500;
+  --on-accent: #202638;
+
+  /* Functional states */
+  --success: #1f9d55;
+  --error: #ba1a1a;
+  --on-error: #ffffff;
+
+  /* Type families. Default = system stack (zero-latency, no webfont flash).
+     Optional upgrade: set --font-display to 'Inter, system-ui, sans-serif' and
+     load Inter via next/font in layout.tsx. */
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial,
+    sans-serif;
+  --font-display: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial,
+    sans-serif;
+}
