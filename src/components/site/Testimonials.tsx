@@ -45,6 +45,7 @@ export function Testimonials({
             ? items.map((t) => (
                 <figure
                   key={t.author}
+                  data-trust-slot="review"
                   className="flex flex-col rounded-md border border-outline bg-surface p-6"
                 >
                   {typeof t.rating === "number" && <Stars rating={t.rating} />}
@@ -64,6 +65,7 @@ export function Testimonials({
                 <DesignedPlaceholder
                   key={i}
                   icon="quote"
+                  slot="review"
                   caption="Your review goes here"
                   className="min-h-44"
                 />

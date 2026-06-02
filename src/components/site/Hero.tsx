@@ -64,12 +64,14 @@ export function Hero({ hero }: { hero: HeroContent }) {
             <img
               src={hero.imageSrc}
               alt=""
+              data-trust-slot="hero-photo"
               className="aspect-[4/3] w-full rounded-lg object-cover"
             />
           ) : (
             <DesignedPlaceholder
               onDark
               icon="bolt"
+              slot="hero-image"
               caption={hero.imageCaption}
               className="min-h-64 md:min-h-80"
             />

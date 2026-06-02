@@ -22,6 +22,7 @@ export function PlaceholderGallery({
             <DesignedPlaceholder
               key={i}
               icon="camera"
+              slot="gallery"
               caption={gallery.caption}
               className="min-h-56"
             />
