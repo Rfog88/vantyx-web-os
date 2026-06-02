@@ -174,7 +174,9 @@ function buildSiteContent(lead) {
 
   const benefits = [
     { icon: "shield", title: "Licensed & Insured", sub: lead.license_no ? `#${lead.license_no}` : "Fully covered" },
-    ...(rating ? [{ icon: "star", title: `${rating}★ Rated`, sub: reviews ? `${reviews.toLocaleString("en-US")} reviews` : "On Google" }] : []),
+    // Attribution travels WITH the ★ rating: class-e-gate's sourced_ratings
+    // check fails a star glyph that has no "Google" (etc.) within 200 chars.
+    ...(rating ? [{ icon: "star", title: `${rating}★ Rated`, sub: reviews ? `${reviews.toLocaleString("en-US")} Google reviews` : "On Google" }] : []),
     ...(nd.emergency ? [{ icon: "bolt", title: "24/7 Emergency", sub: "Always on call" }] : []),
     { icon: "lightbulb", title: "Locally Owned", sub: city ? `${city}-based` : "Local pros" },
   ].slice(0, 4);

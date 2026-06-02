@@ -66,7 +66,7 @@ export const site: SiteContent = {
       {
         "icon": "star",
         "title": "4.9★ Rated",
-        "sub": "87 reviews"
+        "sub": "87 Google reviews"
       },
       {
         "icon": "bolt",
