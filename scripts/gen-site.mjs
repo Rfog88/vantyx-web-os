@@ -11,13 +11,15 @@
  *
  *   --lead-json  JSON file: a single lead object using the leads-table column
  *                names (id, name, phone, niche, city, state, zip, gmaps_rating,
- *                review_count, license_no, service_area_zips, tagline, ...).
+ *                review_count, license_no, service_area_zips, tagline,
+ *                testimonials, gbp_hero_url, ...).
  *   --out        Output path (default src/content/_active.generated.ts).
  *   --dry-run    Print to stdout instead of writing.
  *
  * Honesty (VAN-27): only real fields are used. Real Google rating/review_count
- * become trust stats; missing photos/reviews/license render as designed
- * placeholders downstream — never fabricated.
+ * become trust stats; real GBP reviews (testimonials) and the GBP hero photo
+ * (gbp_hero_url) render when present; missing photos/reviews/license render as
+ * designed placeholders downstream — never fabricated.
  */
 import { readFileSync, writeFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
@@ -106,6 +108,50 @@ function formatPhone(p) {
 }
 const looksLikeStreet = (c) => !c || /\d/.test(c) || /\b(st|ave|rd|blvd|dr|ln|hwy|suite|ste)\b/i.test(c);
 
+// JSON-typed DB columns arrive as strings from sqlite; accept string or value.
+function parseJsonMaybe(v) {
+  if (v == null) return null;
+  if (typeof v !== "string") return v;
+  try { return JSON.parse(v); } catch { return null; }
+}
+
+// Real GBP reviews (leads.testimonials) → SiteContent.Testimonial[]. Deterministic
+// (VAN-13): preserve DB order, no LLM. Honest (VAN-27): real author/quote/rating
+// only; no invented reviewer location. Empty → [] so the component shows placeholders.
+function buildTestimonials(raw) {
+  const arr = parseJsonMaybe(raw);
+  if (!Array.isArray(arr)) return [];
+  const seen = new Set();
+  const out = [];
+  for (const r of arr) {
+    const author = String(r?.author || "").trim();
+    let quote = String(r?.body ?? r?.quote ?? "").replace(/\s+/g, " ").trim();
+    if (!author || quote.length < 30) continue;
+    // Curation, not fabrication (VAN-27): feature only 4–5★ reviews — the ones an
+    // owner would put on their own homepage. Reviews with no rating are kept.
+    const ratingNum = Number(r?.rating);
+    if (Number.isFinite(ratingNum) && ratingNum < 4) continue;
+    const key = author.toLowerCase();
+    if (seen.has(key)) continue;
+    seen.add(key);
+    if (quote.length > 300) {
+      const cut = quote.slice(0, 300);
+      quote = cut.slice(0, cut.lastIndexOf(" ")).trim() + "…";
+    }
+    const t = { quote, author };
+    if (Number.isFinite(ratingNum) && ratingNum > 0) t.rating = Math.round(ratingNum);
+    out.push(t);
+    if (out.length >= 6) break;
+  }
+  return out;
+}
+
+// Real GBP hero photo (leads.gbp_hero_url) → hero.imageSrc; else null (placeholder).
+function pickHeroImage(lead) {
+  const u = lead.gbp_hero_url || lead.hero_url || null;
+  return typeof u === "string" && /^https?:\/\//.test(u) ? u : null;
+}
+
 function buildSiteContent(lead) {
   const niche = String(lead.niche || "electrician").toLowerCase();
   const nd = NICHE[niche] || NICHE.electrician;
@@ -116,6 +162,8 @@ function buildSiteContent(lead) {
   const loc = city ? `${city}${lead.state ? ", " + lead.state : ""}` : (lead.state || "your area");
   const rating = lead.gmaps_rating ? Number(lead.gmaps_rating).toFixed(1) : null;
   const reviews = lead.review_count ? Number(lead.review_count) : null;
+  const testimonialItems = buildTestimonials(lead.testimonials);
+  const heroImage = pickHeroImage(lead);
 
   // honest trust stats — real Google rating/reviews when present
   const stats = [];
@@ -158,11 +206,12 @@ function buildSiteContent(lead) {
       primaryCta: { label: "Book Online", href: "#contact" },
       ghostCta: { label: `Call ${phone}`, href: tel },
       imageCaption: "Your work-van photo goes here",
+      ...(heroImage ? { imageSrc: heroImage } : {}),
       benefits,
     },
     stats,
     services: { eyebrow: "Our Services", heading: `${loc} ${niche === "gc" ? "Contracting" : "Electrical"} Services`.replace("Electrical", niche === "electrician" ? "Electrical" : niche === "plumber" ? "Plumbing" : niche === "hvac" ? "HVAC" : niche === "roofer" ? "Roofing" : "Home"), items: nd.services },
-    testimonials: { eyebrow: "Reviews", heading: "What Customers Say", items: [] },
+    testimonials: { eyebrow: "Reviews", heading: "What Customers Say", items: testimonialItems },
     serviceAreas: { eyebrow: "We Serve", cities: [city || loc].filter(Boolean) },
     finalCta: { heading: `Need ${niche === "hvac" ? "an HVAC pro" : niche === "gc" ? "a contractor" : "an " + niche} in ${loc}?`, lede: `Call ${name} or request service online — licensed, insured, and ready to help.`, cta: { label: "Request Service", href: "#contact" } },
     footer: {
